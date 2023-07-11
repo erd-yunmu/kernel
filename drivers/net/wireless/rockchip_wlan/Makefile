@@ -2,3 +2,10 @@
 obj-$(CONFIG_BCMDHD)	+= rkwifi/
 obj-$(CONFIG_CYW_BCMDHD)	+= cywdhd/
 obj-$(CONFIG_INFINEON_DHD)	+= infineon/
+obj-$(CONFIG_RTL8821CE) += rtl8821ce/
+obj-$(CONFIG_RTL8821CU) += rtl8821cu/
+obj-$(CONFIG_RTL8822BU) += rtl8822bu/
+obj-$(CONFIG_RTL8822CS) += rtl8822cs/
+obj-$(CONFIG_RTL8822CE) += rtl8822ce/
+obj-$(CONFIG_RTL8852BE)	+= rtl8852be/
+obj-$(CONFIG_RTL8852BU)	+= rtl8852bu/

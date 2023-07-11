@@ -15,7 +15,7 @@
 
 &i2c1 {
 	// ov5648 Camare
-	dw9714: dw9714@0c {
+	dw9714: dw9714@c {
 		status = "okay";
 		compatible = "dongwoon,dw9714";
 		reg = <0x0c>;
