@@ -6,8 +6,9 @@
 
 /dts-v1/;
 
-#include "rk3568-lubancat-2.dtsi"
+#include "rk3568-lubancat-2n.dtsi"
 #include "rk3568-android.dtsi"
+
 //MIPI摄像头配置
 #include "rk3568-lubancat-csi2.dtsi"
 
@@ -15,10 +16,9 @@
 //专用镜像如果要开启MIPI屏幕支持，按屏幕型号开启1-3
 //以下3个配置互斥，不可同时开启
 // #include "rk3568-lubancat-dsi0-ebf410125_720p.dtsi" //野火5.5寸 720P
-// #include "rk3568-lubancat-dsi0-ebf410125_1080p.dtsi" //野火5.5寸 1080P
+#include "rk3568-lubancat-dsi0-ebf410125_1080p.dtsi" //野火5.5寸 1080P
 // #include "rk3568-lubancat-dsi0-rpi.dtsi" //树莓派 5寸 800x480
-
 / {
-	model = "EmbedFire LubanCat-2 HDMI";
-	compatible = "embedfire,lubancat-2", "rockchip,rk3568";
+	model = "EmbedFire LubanCat-2N MIPI1080P";
+	compatible = "embedfire,lubancat-2n", "rockchip,rk3568";
 };
