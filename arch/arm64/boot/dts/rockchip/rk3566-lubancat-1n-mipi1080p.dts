@@ -20,6 +20,6 @@
 #include "rk3566-lubancat-dsi0-ebf410125_1080p.dtsi" //野火5.5寸 1080P
 // #include "rk3566-lubancat-dsi0-rpi.dtsi" //树莓派 5寸 800x480
 / {
-	model = "EmbedFire LubanCat 1N MIPI1080P";
+	model = "EmbedFire LubanCat-1";
 	compatible = "embedfire,lubancat-1n", "rockchip,rk3566";
 };

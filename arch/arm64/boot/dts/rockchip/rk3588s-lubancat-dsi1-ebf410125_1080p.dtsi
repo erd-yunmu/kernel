@@ -5,18 +5,18 @@
  */
 
 / {
-	mipi_dsi0_power: mipi-dsi0-power-regulator {
+	mipi_dsi1_power: mipi-dsi1-power-regulator {
 		compatible = "regulator-fixed";
-		regulator-name = "mipi_dsi0_power";
-		gpio = <&gpio1 RK_PD2 GPIO_ACTIVE_HIGH>;
+		regulator-name = "mipi_dsi1_power";
+		gpio = <&gpio1 RK_PD3 GPIO_ACTIVE_HIGH>;
 		enable-active-high;
 		regulator-boot-on;
 		regulator-always-on;
 	};
 
-	backlight0: backlight0 {
+	backlight1: backlight1 {
 		compatible = "pwm-backlight";
-		pwms = <&pwm2 0 25000 0>;
+		pwms = <&pwm6 0 25000 0>;
 		brightness-levels = <
 		0  20  20  21  21  22  22  23
 		23  24  24  25  25  26  26  27
@@ -55,34 +55,34 @@
 	};
 };
 
-&pwm2 {
-	pinctrl-0 = <&pwm2m0_pins>;
+&pwm6 {
+	pinctrl-0 = <&pwm6m0_pins>;
 	status = "okay";
 };
 
-&mipi_dcphy0 {
+&mipi_dcphy1 {
 	status = "okay";
 };
 
-&route_dsi0 {
+&route_dsi1 {
 	status = "okay";
-	connect = <&vp2_out_dsi0>;
+	connect = <&vp3_out_dsi1>;
 };
 
-&dsi0_in_vp2 {
+&dsi1_in_vp3 {
 	status = "okay";
 };
 
-&dsi0 {
+&dsi1 {
 	status = "okay";
-
-	dsi0_panel: panel@0 {
+	
+	dsi1_panel: panel@0 {
         status = "okay";
 		compatible = "simple-panel-dsi";
 		reg = <0>;
-		backlight = <&backlight0>;
-		power-supply = <&mipi_dsi0_power>;
-		reset-gpios = <&gpio0 RK_PB7 GPIO_ACTIVE_LOW>;
+		backlight = <&backlight1>;
+		power-supply = <&mipi_dsi1_power>;
+		reset-gpios = <&gpio0 RK_PD3 GPIO_ACTIVE_LOW>;
 
 		enable-delay-ms = <35>;
 		prepare-delay-ms = <6>;
@@ -125,9 +125,9 @@
 			05 00 01 10
 		];
 
-		disp0_timings0: display-timings {
-			native-mode = <&dsi0_timing0>;
-			dsi0_timing0: timing0 {
+		disp1_timings0: display-timings {
+			native-mode = <&dsi1_timing0>;
+			dsi1_timing0: timing0 {
 				clock-frequency = <131376000>;
 				hactive = <1080>;
 				vactive = <1920>;
@@ -149,8 +149,8 @@
 			#size-cells = <0>;
 			port@0 {
 				reg = <0>;
-				panel_in_dsi0: endpoint {
-					remote-endpoint = <&dsi0_out_panel>;
+				panel_in_dsi1: endpoint {
+					remote-endpoint = <&dsi1_out_panel>;
 				};
 			};
 		};
@@ -162,26 +162,26 @@
 
 		port@1 {
 			reg = <1>;
-			dsi0_out_panel: endpoint {
-				remote-endpoint = <&panel_in_dsi0>;
+			dsi1_out_panel: endpoint {
+				remote-endpoint = <&panel_in_dsi1>;
 			};
 		};
 	};
 };
 
-&i2c5 {
+&i2c6 {
 	status = "okay";
 	pinctrl-names = "default";
-	pinctrl-0 = <&i2c5m3_xfer>;
+	pinctrl-0 = <&i2c6m3_xfer>;
 
-	gt911_dsi0: gt911@5d {
+	gt911_dsi1: gt911@5d {
 		status = "okay";
 		compatible = "goodix,gt911";
 		reg = <0x5d>;
-		interrupt-parent = <&gpio0>;
-		interrupts = <RK_PC5 IRQ_TYPE_LEVEL_LOW>;
-		reset-gpios = <&gpio0 RK_PC0 GPIO_ACTIVE_LOW>;
-		irq-gpios = <&gpio0 RK_PC5 GPIO_ACTIVE_HIGH>;
+		interrupt-parent = <&gpio3>;
+		interrupts = <RK_PC4 IRQ_TYPE_LEVEL_LOW>;
+		reset-gpios = <&gpio3 RK_PC5 GPIO_ACTIVE_LOW>;
+		irq-gpios = <&gpio3 RK_PC4 GPIO_ACTIVE_HIGH>;
 		touchscreen-inverted-x = <1>;
 		touchscreen-inverted-y = <1>;
 	};
