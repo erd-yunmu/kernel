@@ -12,15 +12,12 @@
 // #include "rk3588s-lubancat-csi2_cam0.dtsi"
 // #include "rk3588s-lubancat-csi2_cam1.dtsi"
 // #include "rk3588s-lubancat-csi2_cam2.dtsi"
-
-// #include "rk3588s-lubancat-dsi0-ebf410125_1080p.dtsi"
-// #include "rk3588s-lubancat-dsi1-ebf410125_1080p.dtsi"
-
-// #include "rk3588s-lubancat-dsi0-ebf410173_1024x600.dtsi"
-// #include "rk3588s-lubancat-dsi1-ebf410173_1024x600.dtsi"
-
-#include "rk3588s-lubancat-dsi0-ebf410177_800x1280.dtsi"
-#include "rk3588s-lubancat-dsi1-ebf410177_800x1280.dtsi"
+// #include "rk3588s-lubancat-dsi0-ebf410125_1080p.dtsi" 	//5.5寸
+// #include "rk3588s-lubancat-dsi0-ebf410173_1024x600.dtsi" //7寸
+#include "rk3588s-lubancat-dsi0-ebf410177_800x1280.dtsi" //10.1寸
+// #include "rk3588s-lubancat-dsi1-ebf410125_1080p.dtsi" 	//5.5寸
+// #include "rk3588s-lubancat-dsi1-ebf410173_1024x600.dtsi" //7寸
+#include "rk3588s-lubancat-dsi1-ebf410177_800x1280.dtsi" //10.1寸
 / {
 	model = "Embedfire LubanCat-4";
 	compatible = "rockchip,rk3588s-lubancat-4", "rockchip,rk3588";
