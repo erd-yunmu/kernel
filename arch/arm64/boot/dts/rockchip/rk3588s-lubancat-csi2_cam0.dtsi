@@ -82,6 +82,7 @@
 
 	ov5647_0: ov5647-0@36 {
 		compatible = "ovti,ov5647";
+		status = "disabled";
 		reg = <0x36>;
 		clocks = <&ext_cam0_25m_clk>;
 		clock-names = "ext_cam_25m_clk";
@@ -98,6 +99,7 @@
 
 	ov5648_0: ov5648-0@36 {
 		compatible = "ovti,ov5648";
+		status = "disabled";
 		reg = <0x36>;
 		clocks = <&ext_cam0_24m_clk>;
 		clock-names = "xvclk";
@@ -107,7 +109,6 @@
 		pwdn-gpios = <&gpio1 RK_PA3 GPIO_ACTIVE_HIGH>;
 		reset-gpios = <&gpio1 RK_PA4 GPIO_ACTIVE_LOW>;
 		rotation = <180>;
-		status = "okay";
 
 		rockchip,camera-module-index = <0>;
 		rockchip,camera-module-facing = "back";
@@ -127,6 +128,7 @@
 
 	ov8858_0: ov8858-0@36 {
 		compatible = "ovti,ov8858";
+		status = "disabled";
 		reg = <0x36>;
 		clocks = <&ext_cam0_24m_clk>;
 		clock-names = "xvclk";
@@ -136,9 +138,8 @@
 		pwdn-gpios = <&gpio1 RK_PA3 GPIO_ACTIVE_HIGH>;
 		reset-gpios = <&gpio1 RK_PA4 GPIO_ACTIVE_HIGH>;
 		rotation = <180>;
-		status = "okay";
 
-		rockchip,camera-module-index = <1>;
+		rockchip,camera-module-index = <0>;
 		rockchip,camera-module-facing = "back";
 		rockchip,camera-module-name = "HS5885-BNSM1018-V01";
 		rockchip,camera-module-lens-name = "default";
@@ -156,6 +157,7 @@
 
    ov13850_0: ov13850-0@10 {
 		compatible = "ovti,ov13850";
+		status = "disabled";
 		reg = <0x10>;
 		clocks = <&ext_cam0_24m_clk>;
 		clock-names = "xvclk";
@@ -165,7 +167,6 @@
 		pwdn-gpios = <&gpio1 RK_PA3 GPIO_ACTIVE_HIGH>;
 		reset-gpios = <&gpio1 RK_PA4 GPIO_ACTIVE_HIGH>;
 		rotation = <180>;
-		status = "okay";
 
 		rockchip,camera-module-index = <2>;
 		rockchip,camera-module-facing = "back";
@@ -181,7 +182,29 @@
 				data-lanes = <1 2>;
 			};
 		};
-   };
+    };
+
+	imx415_0: imx415-0@1a {
+		compatible = "sony,imx415";
+		status = "okay";
+		reg = <0x1a>;
+		clocks = <&cru CLK_MIPI_CAMARAOUT_M1>;
+		clock-names = "xvclk";
+		power-domains = <&power RK3588_PD_VI>;
+		avdd-supply = <&cam0_avdd>;
+		dovdd-supply = <&cam0_dovdd>;
+		dvdd-supply = <&cam0_dvdd>;
+		rockchip,camera-module-index = <0>;
+		rockchip,camera-module-facing = "back";
+		rockchip,camera-module-name = "CMK-OT2022-PX1";
+		rockchip,camera-module-lens-name = "IR0147-50IRC-8M-F20";
+		port {
+			imx415_out0: endpoint {
+				remote-endpoint = <&dcphy0_in_imx415>;
+				data-lanes = <1 2 3 4>;
+			};
+		};
+	};
 };
 
 &mipi_dcphy0 {
@@ -222,6 +245,12 @@
 				reg = <4>;
 				remote-endpoint = <&ov5647_out0>;
 				data-lanes = <1 2>;
+			};
+
+			dcphy0_in_imx415: endpoint@5 {
+				reg = <5>;
+				remote-endpoint = <&imx415_out0>;
+				data-lanes = <1 2 3 4>;
 			};
 		};
 

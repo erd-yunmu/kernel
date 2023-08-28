@@ -1247,6 +1247,16 @@
 	status = "okay";
 };
 
+&rknpu {
+	rknpu-supply = <&vdd_npu_s0>;
+	mem-supply = <&vdd_npu_mem_s0>;
+	status = "okay";
+};
+
+&rknpu_mmu {
+	status = "okay";
+};
+
 &gmac1 {
 	/* Use rgmii-rxid mode to disable rx delay inside Soc */
 	phy-mode = "rgmii-rxid";
