@@ -265,7 +265,7 @@
 	fan: pwm-fan {
 		compatible = "pwm-fan";
 		#cooling-cells = <2>;
-		pwms = <&pwm0 0 500000 0>;
+		pwms = <&pwm0 0 250000 0>;
 		cooling-levels = <0 100 150 200 255>;
 		rockchip,temp-trips = <
 			50000	1
@@ -1014,25 +1014,6 @@
 	status = "okay";
 };
 
-&hdmi0 {
-	enable-gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
-	cec-enable = "true";
-	status = "okay";
-};
-
-&hdmi0_in_vp0 {
-	status = "okay";
-};
-
-&hdptxphy_hdmi0 {
-	status = "okay";
-};
-
-&route_hdmi0{
-	status = "okay";
-	connect = <&vp0_out_hdmi0>;
-};
-
 &iep {
 	status = "okay";
 };
@@ -1207,6 +1188,16 @@
 	status = "okay";
 };
 
+&rknpu {
+	rknpu-supply = <&vdd_npu_s0>;
+	mem-supply = <&vdd_npu_mem_s0>;
+	status = "okay";
+};
+
+&rknpu_mmu {
+	status = "okay";
+};
+
 &rkvdec_ccu {
 	status = "okay";
 };
@@ -1244,16 +1235,6 @@
 };
 
 &rkvenc1_mmu {
-	status = "okay";
-};
-
-&rknpu {
-	rknpu-supply = <&vdd_npu_s0>;
-	mem-supply = <&vdd_npu_mem_s0>;
-	status = "okay";
-};
-
-&rknpu_mmu {
 	status = "okay";
 };
 
@@ -1297,6 +1278,7 @@
 	reset-gpios = <&gpio3 RK_PD1 GPIO_ACTIVE_HIGH>;
 	disable-gpios = <&gpio3 RK_PC6 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie20>;
+	rockchip,skip-scan-in-resume;
 	status = "okay";
 };
 
@@ -1414,20 +1396,6 @@
 	status = "okay";
 };
 
-/* DP Controller */
-&dp0 {
-	status = "okay";
-};
-
-&route_dp0 {
-	status = "okay";
-	connect = <&vp1_out_dp0>;	
-};
-
-&dp0_in_vp1 {
-	status = "okay";
-};
-
 &vdpu {
 	status = "okay";
 };
@@ -1440,8 +1408,63 @@
 	status = "okay";
 };
 
+/* hdmi0 display */
+
+&hdmi0 {
+	enable-gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
+	cec-enable = "true";
+	status = "okay";
+};
+
+&route_hdmi0{
+	status = "okay";
+	connect = <&vp0_out_hdmi0>;
+};
+
+&hdmi0_in_vp0 {
+	status = "okay";
+};
+
+&hdmi0_in_vp1 {
+	status = "disabled";
+};
+
+&hdmi0_in_vp2 {
+	status = "disabled";
+};
+
+&hdptxphy_hdmi0 {
+	status = "okay";
+};
+
+/* dp0 display */
+
+&dp0 {
+	status = "okay";
+};
+
+&route_dp0 {
+	status = "okay";
+	connect = <&vp1_out_dp0>;	
+};
+
+&dp0_in_vp0 {
+	status = "disabled";
+};
+
+&dp0_in_vp1 {
+	status = "okay";
+};
+
+&dp0_in_vp2 {
+	status = "disabled";
+};
+
 &vop {
 	status = "okay";
+	disable-win-move;
+	assigned-clocks = <&cru ACLK_VOP>;
+	assigned-clock-rates = <800000000>;
 };
 
 &vop_mmu {
@@ -1452,21 +1475,34 @@
 &vp0 {
 	rockchip,plane-mask = <(1 << ROCKCHIP_VOP2_CLUSTER0 | 1 << ROCKCHIP_VOP2_ESMART0)>;
 	rockchip,primary-plane = <ROCKCHIP_VOP2_ESMART0>;
+	cursor-win-id = <ROCKCHIP_VOP2_CLUSTER0>;
 };
 
 &vp1 {
 	rockchip,plane-mask = <(1 << ROCKCHIP_VOP2_CLUSTER1 | 1 << ROCKCHIP_VOP2_ESMART1)>;
 	rockchip,primary-plane = <ROCKCHIP_VOP2_ESMART1>;
+	cursor-win-id = <ROCKCHIP_VOP2_CLUSTER1>;
 };
 
 &vp2 {
 	rockchip,plane-mask = <(1 << ROCKCHIP_VOP2_CLUSTER2 | 1 << ROCKCHIP_VOP2_ESMART2)>;
 	rockchip,primary-plane = <ROCKCHIP_VOP2_ESMART2>;
+	cursor-win-id = <ROCKCHIP_VOP2_CLUSTER2>;
 };
 
 &vp3 {
 	rockchip,plane-mask = <(1 << ROCKCHIP_VOP2_CLUSTER3 | 1 << ROCKCHIP_VOP2_ESMART3)>;
 	rockchip,primary-plane = <ROCKCHIP_VOP2_ESMART3>;
+	cursor-win-id = <ROCKCHIP_VOP2_CLUSTER3>;
+};
+
+&display_subsystem {
+	clocks = <&hdptxphy_hdmi_clk0>;
+	clock-names = "hdmi0_phy_pll";
+};
+
+&hdptxphy_hdmi_clk0 {
+    status = "okay";
 };
 
 &pinctrl {
