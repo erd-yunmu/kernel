@@ -157,8 +157,8 @@
 		};
 	};
 
-   ov13850: ov13850@10 {
-		compatible = "ovti,ov13850";
+    ov13850: ov13850@10 {
+	    compatible = "ovti,ov13850";
 		reg = <0x10>;
 		clocks = <&ext_cam_24m_clk>;
 		clock-names = "xvclk";
@@ -184,7 +184,30 @@
 				data-lanes = <1 2 3 4>;
 			};
 		};
-   };
+	};
+
+	imx415_0: imx415-0@1a {
+		compatible = "sony,imx415";
+		status = "okay";
+		reg = <0x1a>;
+		clocks = <&cru CLK_MIPI_CAMARAOUT_M1>;
+		clock-names = "xvclk";
+		power-domains = <&power RK3588_PD_VI>;
+		dovdd-supply= <&cam_dovdd>;
+		avdd-supply = <&cam_avdd>;
+		dvdd-supply = <&cam_dvdd>;
+		rockchip,camera-module-index = <0>;
+		rockchip,camera-module-facing = "back";
+		rockchip,camera-module-name = "CMK-OT2022-PX1";
+		rockchip,camera-module-lens-name = "IR0147-50IRC-8M-F20";
+		
+		port {
+			imx415_out0: endpoint {
+				remote-endpoint = <&dcphy0_in_imx415>;
+				data-lanes = <1 2 3 4>;
+			};
+		};
+	};
 };
 
 &csi2_dphy0_hw {
@@ -225,6 +248,13 @@
 				reg = <4>;
 				remote-endpoint = <&ov5647_out>;
 				data-lanes = <1 2>;
+			
+			};
+
+			dcphy0_in_imx415: endpoint@5 {
+				reg = <5>;
+				remote-endpoint = <&imx415_out0>;
+				data-lanes = <1 2 3 4>;
 			};
 		};
 

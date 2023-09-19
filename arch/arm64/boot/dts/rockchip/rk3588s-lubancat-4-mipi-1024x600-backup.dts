@@ -7,13 +7,10 @@
 
 #include "rk3588s-lubancat-4-backup.dtsi"
 #include "rk3588-android.dtsi"
-// #include "rk3588s-lubancat-40pin.dtsi"
-// #include "rk3588s-lubancat-csi2.dtsi"
-// #include "rk3588s-lubancat-csi2_cam0.dtsi"
-// #include "rk3588s-lubancat-csi2_cam1.dtsi"
-// #include "rk3588s-lubancat-csi2_cam2.dtsi"
+#include "rk3588s-lubancat-csi2.dtsi"
+
 // #include "rk3588s-lubancat-dsi0-ebf410125_1080p.dtsi"
-#include "rk3588s-lubancat-dsi0-ebf410173_1024x600.dtsi"
+#include "rk3588s-lubancat-dsi0-tast-ebf410173_1024x600.dtsi"
 // #include "rk3588s-lubancat-dsi1-ebf410173_1024x600.dtsi"
 // #include "rk3588s-lubancat-dsi0-10.1-800x1280.dtsi"
 / {

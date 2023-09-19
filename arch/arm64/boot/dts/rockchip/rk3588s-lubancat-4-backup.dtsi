@@ -273,9 +273,9 @@
 		>;
 	};
 
-	backlight: backlight {
+	backlight0: backlight0 {
 		compatible = "pwm-backlight";
-		pwms = <&pwm6 0 25000 0>;
+		pwms = <&pwm2 0 25000 0>;
 		brightness-levels = <
 		0  20  20  21  21  22  22  23
 		23  24  24  25  25  26  26  27
@@ -915,9 +915,9 @@
 		#sound-dai-cells = <0>;
 		compatible = "everest,es8388", "everest,es8323";
 		reg = <0x11>;
-		clocks = <&cru I2S0_8CH_MCLKOUT>;
+		clocks = <&mclkout_i2s0>;
 		clock-names = "mclk";
-		assigned-clocks = <&cru I2S0_8CH_MCLKOUT>;
+		assigned-clocks = <&mclkout_i2s0>;
 		assigned-clock-rates = <12288000>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&i2s0_mclk>;
@@ -1214,7 +1214,7 @@
 			 &gmac1_rgmii_clk
 			 &gmac1_rgmii_bus>;
 
-	tx_delay = <0x30>;
+	tx_delay = <0x44>;
 	/* rx_delay = <0x4f>; */
 
 	phy-handle = <&rgmii_phy1>;
@@ -1447,3 +1447,4 @@
 		};
 	};
 };
+
